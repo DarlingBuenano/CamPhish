@@ -1,19 +1,22 @@
 # CamPhish
-Grab cam shots from target's phone front camera or PC webcam just sending a link.
-![cheese](https://techchip.net/wp-content/uploads/2020/04/camphish.jpg)
+Capture tomas de cámara desde la cámara frontal del teléfono objetivo o la cámara web de la PC simplemente enviando un enlace.
+<!--![cheese](https://techchip.net/wp-content/uploads/2020/04/camphish.jpg)-->
 
-# What is CamPhish?
-<p>CamPhish is techniques to take cam shots of target's phone fornt camera or PC webcam. CamPhish Hosts a fake website on in built PHP server and uses ngrok & serveo to generate a link which we will forward to the target, which can be used on over internet. website asks for camera permission and if the target allows it, this tool grab camshots of target's device</p>
+# ¿Qué es CamPhish?
+<p>CamPhish es una técnica para tomar fotografías de la cámara del teléfono del objetivo o de la cámara web de la PC. CamPhish aloja un sitio web falso en un servidor PHP integrado y utiliza ngrok & serveo para generar un enlace que enviaremos al objetivo, que se puede utilizar a través de Internet. El sitio web solicita permiso de la cámara y, si el objetivo lo permite, esta herramienta captura capturas de cámara del dispositivo del objetivo.</p>
 
-## Features
-<p>In this tool I added two automatic webpage templates for engaged target on webpage to get more picture of cam</p>
+## Características
+<p>En esta herramienta, agregué dos plantillas de página web automáticas para el objetivo comprometido en la página web para obtener más imágenes de la cámara.</p>
 <ul>
-  <li>Festival Wishing</li>
-  <li>Live YouTube TV</li>
+  <li>Facebook</li>
+  <li>Instagram</li>
+  <li>Meet</li>
+  <li>Youtube</li>
+  <li>Google</li>
 </ul>
-<p>simply enter festival name or youtube's video ID</p>
+<p><strong>Facebook:</strong> Sencillo como ingresar la foto de perfil, nombre del usuario, foto y descripcion de la publicación</p>
 
-## This Tool Tested On :
+## Esta herramienta probada en:
 <ul>
   <li>Kali Linux</li>
   <li>Termux</li>
@@ -22,22 +25,17 @@ Grab cam shots from target's phone front camera or PC webcam just sending a link
   <li>Perrot Sec OS</li>
 </ul>
 
-# Installing and requirements
-<p>This tool require PHP for webserver, SSH or serveo link. First run following command on your terminal</p>
+# Instalación y requisitos
+<p>Esta herramienta requiere PHP para servidor web, SSH o serveo link. Primero ejecute el siguiente comando en su terminal</p>
 
 ```
 apt-get -y install php openssh git wget
 ```
 
-## Installing (Kali Linux/Termux):
+## Instalación (Kali Linux/Termux):
 
 ```
 git clone https://github.com/techchipnet/CamPhish
 cd CamPhish
 bash camphish.sh
 ```
-### Video Demo
-[![How to control android camera](https://img.youtube.com/vi/G_nNHrWwCOM/0.jpg)](https://www.youtube.com/watch?v=G_nNHrWwCOM)
-#### For More Video subcribe <a href="http://youtube.com/techchipnet">TechChip YouTube Channel</a>
-<p>CamPhish is created to help in penetration testing and it's not responsible for any misuse or illegal purposes.</p>
-<p>CamPhish is inspired by https://github.com/thelinuxchoice/ Big thanks to @thelinuxchoice</p>

