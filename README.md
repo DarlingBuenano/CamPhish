@@ -3,7 +3,7 @@ Capture tomas de cámara desde la cámara frontal del teléfono objetivo o la c�
 <!--![cheese](https://techchip.net/wp-content/uploads/2020/04/camphish.jpg)-->
 
 # ¿Qué es CamPhish?
-<p>CamPhish es una técnica para tomar fotografías de la cámara del teléfono del objetivo o de la cámara web de la PC. CamPhish aloja un sitio web falso en un servidor PHP integrado y utiliza ngrok & serveo para generar un enlace que enviaremos al objetivo, que se puede utilizar a través de Internet. El sitio web solicita permiso de la cámara y, si el objetivo lo permite, esta herramienta captura capturas de cámara del dispositivo del objetivo.</p>
+<p>CamPhish es una técnica para tomar fotografías de la cámara del teléfono del objetivo o de la cámara web de la PC. CamPhish aloja un sitio web falso en un servidor PHP integrado y utiliza ngrok & serveo para generar un enlace que enviaremos al objetivo, que se puede utilizar a través de Internet. El sitio web solicita permiso de la cámara y, si el objetivo lo permite, esta herramienta captura imágenes de la cámara del dispositivo del objetivo.</p>
 
 ## Características
 <p>En esta herramienta, agregué dos plantillas de página web automáticas para el objetivo comprometido en la página web para obtener más imágenes de la cámara.</p>
