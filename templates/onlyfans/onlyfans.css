@@ -1,0 +1,384 @@
+:root{
+    --always-white: #ffffff;
+    --gris-claro: #77787c5b;
+    --gris-oscuro: #77787cc9;
+    --negro: #141414c7;
+    --hover: #e0ffed75;
+    --btn: #00AFF0;
+    --btn-hover:#1ba0d1;
+}
+p{
+    margin: 2px 0px;
+}
+a{
+    text-decoration: none;
+}
+
+body{
+    background-color: var(--always-white);
+    margin: 0px;
+    padding: 0px;
+    font-family: Roboto, sans-serif;
+    line-height: 18px;
+}
+.gris-oscuro{
+    fill: var(--gris-oscuro);
+}
+
+.gris-claro{
+    fill: var(--gris-claro);
+}
+
+.always-white{
+    fill: var(--always-white);
+}
+/*  HEADER  */
+.header{
+    background-color: var(--always-white);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0px 0px 1px 1px var(--gris-claro);
+}
+
+.header > div{
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.header > div.flex-derecha ul{
+    margin-left: 70%;
+}
+.header > div.flex-izquierda ul{
+    margin-left: 25%;
+}
+.header > div > ul{
+    list-style-type: none;
+    margin: 0px;
+    padding: 0px;
+    display: flex;
+    align-items: center;
+}
+
+.header > div.flex-izquierda > ul > li, .header > div.flex-derecha > ul > li{
+    padding: 3px;
+    cursor: pointer;
+}
+
+.header > div.flex-izquierda > ul > li:hover, .header > div.flex-derecha > ul > li:hover{
+    border-radius: 50%;
+    background-color: var(--hover);
+}
+
+/*   MAIN   */
+
+main{
+    margin-top: 52px;
+    background-color: var(--always-white);
+}
+
+.contenedor{
+    width: 75%;
+	margin: auto;
+}
+
+.panel-portada{
+    height: 204px;
+    width: 100%;
+    position: relative;
+}
+
+.portada{
+    height: 204px;
+    width: 100%;
+    object-fit: cover;
+    border-bottom-left-radius: 7px;
+    border-bottom-right-radius: 7px;
+}
+
+.header-portada{
+    position: absolute;
+    width: 100%;
+}
+
+.panel-flecha, .header-portada-contenido, .panel-mas{
+    display: inline-block;
+}
+
+.panel-flecha{
+    float: left;
+    margin-top: 10px;
+}
+
+.panel-flecha .btnSalir{
+    background-color: Transparent;
+    border: none;
+    cursor: pointer;
+    margin-left: 10px;
+    padding: 6px;
+    width: 35px;
+}
+
+.panel-mas{
+    padding: 6px;
+    float: right;
+}
+
+.panel-mas .btnMas{
+    background-color: Transparent;
+    border: none;
+    cursor: pointer;
+    padding: 6px;
+    width: 35px;
+    transform: rotate(90deg);
+}
+
+.panel-flecha .btnSalir:hover{
+    background-color: var(--gris-claro);
+    border-radius: 100%;
+}
+
+.panel-mas .btnMas:hover{
+    background-color: var(--gris-claro);
+    border-radius: 100%;
+}
+
+.perfil{
+    margin-top: -30px;
+    margin-left: 10px;
+    position: relative;
+    height: 96px;
+    width: 96px;
+    border-radius: 100%;
+    border: 4px solid var(--always-white); 
+    object-fit: cover;
+}
+
+.nombre-perfil, .numero-fotos, .header-nombre-perfil{
+    font-weight: bold;
+}
+
+.nombre-perfil, .numero-fotos, .header-nombre-perfil{
+    color: var(--negro);
+}
+
+.header-nombre-perfil, .header-info-perfil{
+    color: var(--always-white);
+}
+
+.header-info-perfil{
+    font-size: 16px;
+    margin-top: -19px;
+}
+
+.header-nombre-perfil, .header-info-perfil{
+    margin-left: 4px;
+}
+
+.nombre-perfil, .header-nombre-perfil{
+    font-size: 19px;
+    margin-top: 4px;
+}
+
+.numero-fotos{
+    font-size: 16px;
+    margin-top: 12px;
+}
+
+.descripcion-perfil{
+    font-size: 16px;
+    text-align: justify;
+}
+
+.nombre-perfil, .usuario-perfil, .descripcion-perfil, .panel-paquete, numero-fotos{
+    margin-left: 16px;
+}
+
+.nombre-perfil, .header-nombre-perfil, .usuario-perfil, .descripcion-perfil, .panel-paquete, numero-fotos{
+    font-family: Roboto, sans-serif;
+}
+
+.usuario-perfil{
+    color: var(--gris-oscuro);
+    font-size: 14px;
+    margin-top: -15px;
+}
+
+.btnCompartir{
+    border: solid 1px var(--gris-claro);
+	border-radius: 100%;
+	background-color: var(--white);
+    cursor: pointer;
+    color: var(--btn);
+    float: right;
+    margin-top: 15px;
+    margin-right: 18px;
+    height: 48px;
+	width: 48px;
+}
+
+.btnCompartir:hover{
+    border-radius: 100%;
+    background-color:var(--hover);
+    color: turquoise;
+    border-color: turquoise;
+}
+
+.btnCompartir .icono{
+    font-size: 19px;
+}
+
+.panel-paquete{
+    border: solid 1px var(--gris-claro);
+    border-radius: 6px;
+    margin-top: 20px;
+    width: 96%;
+}
+
+.paquete{
+    color: var(--negro);
+    font-size: 17px;
+    font-weight: bold;
+    padding: 14px;
+}
+
+.btnSuscribir{
+    background-color: var(--btn);
+    border-radius: 18px;
+    border:none;
+    color: var(--always-white);
+    cursor: pointer;
+    font-weight: bold;
+    text-align: center;
+    padding: 7px;
+    width: 97%;
+}
+
+.btnSuscribir:hover{
+    background-color: var(--btn-hover);
+}
+
+.panel-paquete div{
+    text-align: center;
+    margin-bottom: 16px;
+}
+
+.menu-perfil{
+    cursor: pointer;
+    margin-top: 25px;
+    border-bottom: solid 1px var(--gris-claro);
+}
+
+.menu-perfil .opcion{
+    display: inline-block;
+    margin-left: 18%;
+    text-align: center;
+    width: 24px;
+}
+
+.imagen-bloqueada{
+    background-color:#dfe0e2b0;
+    display: inline-block;
+    width: 33%;
+    height: 365px;
+    position: relative;
+}
+
+.blocked{
+    background-color: transparent;
+    border: none;
+    position: absolute;
+    top: 40%;
+    left: 40%;
+    width: 18%;
+    height: 23%;
+}
+
+.btnVerImagen{
+    background-color: transparent;
+    position: absolute;
+    border: none;
+    width: 10%;
+    height: 10%;
+    left: 2%;
+    bottom: 2%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media only screen and (max-width: 720px){
+    .header{
+        display: none;
+    }
+
+    main{
+        margin: 0px;
+    }
+
+    main > .contenedor{
+        width: 100%;
+    }
+
+    .portada{
+        height: 180px;
+        width: 100%;
+        border-bottom-left-radius: 0px;
+        border-bottom-right-radius: 0px;
+    }
+	
+	.perfil{
+    margin-top: -45px;
+	}
+	
+    .descripcion-perfil{
+        padding-right: 16px;
+    }
+
+	.btnCompartir{
+        margin-top: -8px;
+    }
+    .panel-paquete{
+        width: 92%;
+    }
+    
+    .btnSuscribir{
+        width: 92%;
+    }
+
+    .menu-perfil .opcion{
+        margin-left: 13%;
+    }
+
+    .imagenes{
+        margin-left: 14px;
+    }
+
+    .imagen-bloqueada{
+        width: 31%;
+        height: 160px;
+    }
+
+    .blocked{
+        top: 30%;
+        left: 30%;
+        width: 40%;
+        height: 45%;
+    }
+}
+

